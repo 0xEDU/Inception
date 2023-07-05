@@ -1,0 +1,43 @@
+all: setup up
+
+setup:
+	@sudo echo "Setting hosts..."
+	@sudo chmod a+w /etc/hosts
+	@sudo cat /etc/hosts | grep etachott.42.fr || echo "127.0.0.1 etachott.42.fr" >> /etc/hosts
+	@sudo mkdir -p /home/etachott/data
+
+up: mariadb
+
+nginx:
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d nginx 
+
+build-nginx:
+	sudo docker-compose -f ./srcs/docker-compose.yml up --build nginx -d
+
+down-nginx:
+	sudo docker-compose -f ./srcs/docker-compose.yml down nginx
+
+
+mariadb:
+	sudo mkdir -p /home/etachott/data/wp-database
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d mariadb 
+
+build-mariadb:
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build --force-recreate mariadb
+
+down-mariadb:
+	sudo docker-compose -f ./srcs/docker-compose.yml down mariadb
+
+down:
+	sudo docker-compose -f ./srcs/docker-compose.yml down
+
+clean:
+	@sudo rm -rf /home/etachott
+	@sudo docker-compose -f ./srcs/docker-compose.yml down -v --rmi all --remove-orphans
+
+fclean: clean
+	@sudo docker system prune --volumes --all --force
+
+re: fclean all
+
+.PHONY: all

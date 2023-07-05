@@ -1,0 +1,32 @@
+version: "3"
+services:
+  nginx:
+    build:
+      context: ./requirements/nginx
+      args:
+        - DOMAIN_NAME
+    container_name: nginx
+    ports:
+      - "443:443"
+    restart:
+      always
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    container_name: mariadb
+    volumes:
+      - wp-database:/wp-database
+    restart:
+      always
+  # wordpress:
+  #   build:
+  #     context: ./requirements/wordpress
+  #     args:
+volumes:
+  wp-database:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/etachott/data/wp-database'
+
