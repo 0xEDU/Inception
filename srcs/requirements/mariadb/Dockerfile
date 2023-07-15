@@ -1,18 +1,24 @@
-FROM debian:bullseye
+FROM alpine:3.17
 
-RUN apt-get update && apt-get upgrade 
-RUN apt-get install mariadb-server -y
+ARG WP_DATABASE_NAME
+ARG WP_DATABASE_USER
+ARG WP_DATABASE_PASSWORD
+ARG WP_DATABASE_ROOT
+ARG WP_DATABASE_ROOT_PASSWORD
+
+RUN mkdir -p /var/lib/mysql /var/run/mysqld 
+RUN chmod -R 777 /var/run/mysqld
 
 COPY ./conf/my.cnf /etc/mysql/my.cnf
-COPY ./tools/configureDB.sh /bin/configureDB
-RUN chmod +x /bin/configureDB
 
-RUN mkdir -p /wp-database
-RUN chown -R mysql:mysql /wp-database
-RUN chmod -R 755 /wp-database
+RUN apk update
+RUN apk add mariadb mariadb-client openrc
+RUN chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 
+COPY ./tools/configureDB.sh /tmp/configureDB.sh
+RUN chmod a+x /tmp/configureDB.sh
+RUN ash -f /tmp/configureDB.sh
 
-# USER mysql
-RUN mariadb-install-db --datadir=/wp-database
-# RUN mariadb-install-db
-CMD [ "configureDB" ]
+EXPOSE 3306
+
+ENTRYPOINT  [ "mariadbd-safe" ]

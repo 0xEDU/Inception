@@ -13,9 +13,15 @@ services:
   mariadb:
     build:
       context: ./requirements/mariadb
+      args:
+        - WP_DATABASE_NAME
+        - WP_DATABASE_USER
+        - WP_DATABASE_PASSWORD
+        - WP_DATABASE_ROOT
+        - WP_DATABASE_ROOT_PASSWORD
     container_name: mariadb
     volumes:
-      - wp-database:/wp-database
+      - wp-database:/var/lib/mysql
     restart:
       always
   # wordpress:

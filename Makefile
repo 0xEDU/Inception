@@ -6,7 +6,7 @@ setup:
 	@sudo cat /etc/hosts | grep etachott.42.fr || echo "127.0.0.1 etachott.42.fr" >> /etc/hosts
 	@sudo mkdir -p /home/etachott/data
 
-up: mariadb
+up: nginx mariadb
 
 nginx:
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d nginx 
@@ -16,7 +16,6 @@ build-nginx:
 
 down-nginx:
 	sudo docker-compose -f ./srcs/docker-compose.yml down nginx
-
 
 mariadb:
 	sudo mkdir -p /home/etachott/data/wp-database
