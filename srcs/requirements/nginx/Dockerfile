@@ -9,5 +9,4 @@ RUN apk add nginx openssl openrc
 
 RUN openssl req -newkey rsa:2048 -nodes -keyout /etc/nginx/private.key -x509 -days 365 -out /etc/nginx/certificate.pem -subj "/C=BR/ST=SP/L=SãoPaulo/O=42sp/CN=etachott.42.fr"
 
-ENTRYPOINT ["nginx"]
-CMD ["-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
