@@ -1,5 +1,12 @@
-FROM debian:bullseye
+FROM alpine:3.17
 
-RUN apt-get update -y && apt-get upgrade -y
+RUN mkdir -p /var/www/wordpress
 
-RUN apt-get install php -y
+WORKDIR /var/www/wordpress/
+COPY conf/index.php .
+
+RUN apk update
+RUN apk add php-fpm
+
+# ENTRYPOINT [ "php-fpm81" ]
+ENTRYPOINT [ "tail", "-f" ]
