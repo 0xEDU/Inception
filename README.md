@@ -1,0 +1,27 @@
+# Inception
+Repository for École 42's Inception project
+
+## Example .env
+
+```sh
+DOMAIN_NAME=xxx
+
+# MariaDB
+WP_DATABASE_HOST=xxx
+WP_DATABASE_NAME=xxx
+WP_DATABASE_USER=xxx
+WP_DATABASE_PASSWORD=xxx
+WP_DATABASE_ROOT=xxx
+WP_DATABASE_ROOT_PASSWORD=xxx
+
+# WORDPRESS
+WP_URL=xxx
+WP_TITLE=xxx
+WP_ADMIN_USER=xxx
+WP_ADMIN_PASSWORD=xxx
+WP_ADMIN_EMAIL=xxx
+WP_USER=xxx
+WP_USER_PASSWORD=xxx
+WP_USER_EMAIL=xxx
+```
+
