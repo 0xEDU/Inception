@@ -12,4 +12,6 @@ wp core install --allow-root --path=/var/www/wordpress --url=$WP_URL --title=$WP
 
 wp theme activate twentytwentytwo --allow-root
 
+wp user create $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD --allow-root
+
 php-fpm81 -F
