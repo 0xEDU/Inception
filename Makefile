@@ -10,6 +10,16 @@ setup:
 up:
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d
 
+redis:
+	sudo mkdir -p /home/etachott/data/wp-pages
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d redis
+
+build-redis:
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build --force-recreate redis
+
+down-redis:
+	sudo docker-compose -f ./srcs/docker-compose.yml down redis
+
 nginx:
 	sudo mkdir -p /home/etachott/data/wp-pages
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d nginx 

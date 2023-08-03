@@ -47,7 +47,18 @@ services:
       always
     depends_on:
       - mariadb
-        
+      - redis
+  
+  redis:
+    image: redis
+    build:
+      context: ./bonus/redis
+    container_name: redis
+    networks:
+      - inception
+    restart:
+      always
+
   mariadb:
     image: mariadb
     build:
@@ -84,5 +95,3 @@ networks:
   inception:
     driver: bridge
     name: inception
-
-        
