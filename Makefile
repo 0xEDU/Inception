@@ -6,6 +6,7 @@ setup:
 	@sudo cat /etc/hosts | grep etachott.42.fr || echo "127.0.0.1 etachott.42.fr" >> /etc/hosts
 	@sudo mkdir -p /home/etachott/data/wp-pages
 	@sudo mkdir -p /home/etachott/data/wp-database
+	@sudo mkdir -p /home/etachott/data/adminer-volume
 
 up:
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d
@@ -19,6 +20,16 @@ build-redis:
 
 down-redis:
 	sudo docker-compose -f ./srcs/docker-compose.yml down redis
+
+adminer:
+	sudo mkdir -p /home/etachott/data/wp-pages
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d adminer
+
+build-adminer:
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build --force-recreate adminer
+
+down-adminer:
+	sudo docker-compose -f ./srcs/docker-compose.yml down adminer
 
 nginx:
 	sudo mkdir -p /home/etachott/data/wp-pages
