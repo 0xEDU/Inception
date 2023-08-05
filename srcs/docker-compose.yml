@@ -122,6 +122,19 @@ services:
     restart:
       always
 
+  minecraft:
+    image: minecraft
+    build:
+      context: ./bonus/minecraft
+    container_name: minecraft
+    volumes:
+      - minecraft-volume:/data
+    ports:
+      - "25565:4242"
+    networks:
+      - inception
+    restart:
+      always
 
 volumes:
   wp-database:
@@ -142,6 +155,12 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/home/etachott/data/adminer-volume'
+  minecraft-volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/etachott/data/minecraft-volume'
 
 networks:
   inception:

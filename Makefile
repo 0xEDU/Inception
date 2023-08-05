@@ -7,6 +7,7 @@ setup:
 	@sudo mkdir -p /home/etachott/data/wp-pages
 	@sudo mkdir -p /home/etachott/data/wp-database
 	@sudo mkdir -p /home/etachott/data/adminer-volume
+	@sudo mkdir -p /home/etachott/data/minecraft-volume
 
 up:
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d
@@ -30,6 +31,16 @@ build-adminer:
 
 down-adminer:
 	sudo docker-compose -f ./srcs/docker-compose.yml down adminer
+
+minecraft:
+	sudo mkdir -p /home/etachott/data/wp-pages
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d minecraft
+
+build-minecraft:
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build --force-recreate minecraft
+
+down-minecraft:
+	sudo docker-compose -f ./srcs/docker-compose.yml down minecraft
 
 site:
 	sudo mkdir -p /home/etachott/data/wp-pages
