@@ -50,7 +50,25 @@ services:
       always
     depends_on:
       - mariadb
-      
+
+  mariadb:
+    image: mariadb
+    build:
+      context: ./requirements/mariadb
+      args:
+        - WP_DATABASE_NAME
+        - WP_DATABASE_USER
+        - WP_DATABASE_PASSWORD
+        - WP_DATABASE_ROOT
+        - WP_DATABASE_ROOT_PASSWORD
+    container_name: mariadb
+    volumes:
+      - wp-database:/var/lib/mysql
+    networks:
+      - inception
+    restart:
+      always
+
   adminer:
     image: adminer
     build:
@@ -77,19 +95,11 @@ services:
     depends_on:
       - wordpress
 
-  mariadb:
-    image: mariadb
+  site:
+    image: site
     build:
-      context: ./requirements/mariadb
-      args:
-        - WP_DATABASE_NAME
-        - WP_DATABASE_USER
-        - WP_DATABASE_PASSWORD
-        - WP_DATABASE_ROOT
-        - WP_DATABASE_ROOT_PASSWORD
-    container_name: mariadb
-    volumes:
-      - wp-database:/var/lib/mysql
+      context: ./bonus/site
+    container_name: site
     networks:
       - inception
     restart:
