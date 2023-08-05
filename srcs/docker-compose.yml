@@ -105,6 +105,24 @@ services:
     restart:
       always
 
+  cadvisor:
+    image: cadvisor
+    build:
+      context: ./bonus/cadvisor
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - inception
+    restart:
+      always
+
+
 volumes:
   wp-database:
     driver: local
