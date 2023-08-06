@@ -83,6 +83,27 @@ services:
     depends_on:
       - mariadb
   
+  ftp:
+    image: ftp
+    build:
+      context: ./bonus/ftp
+      args:
+        - FTP_PATH
+        - FTP_USER
+        - FTP_PASSWORD
+    container_name: ftp
+    volumes:
+      - wp-pages:/var/www/wordpress
+    networks:
+      - inception
+    ports:
+      - "21:21"
+      - "10090-10100:10090-10100"
+    restart:
+      always
+    depends_on:
+      - wordpress
+  
   redis:
     image: redis
     build:

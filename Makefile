@@ -52,6 +52,16 @@ build-site:
 down-site:
 	sudo docker-compose -f ./srcs/docker-compose.yml down site
 
+ftp:
+	sudo mkdir -p /home/etachott/data/wp-pages
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d ftp
+
+build-ftp:
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build --force-recreate ftp
+
+down-ftp:
+	sudo docker-compose -f ./srcs/docker-compose.yml down ftp
+
 nginx:
 	sudo mkdir -p /home/etachott/data/wp-pages
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d nginx 
