@@ -14,7 +14,7 @@ RUN mkdir -p /var/log \
 RUN adduser -D -g "" --home /home/$FTP_USER --shell /bin/ash $FTP_USER 
 RUN echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
 
-RUN echo "local_root=$FTP_PATH" >> /etc/vsftpd/vsftpd.conf
+RUN echo -e "\nlocal_root=$FTP_PATH" >> /etc/vsftpd/vsftpd.conf
 
 EXPOSE 21
 
