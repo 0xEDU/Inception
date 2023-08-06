@@ -21,7 +21,7 @@ COPY tools/wp-entrypoint.sh /tmp/wp-entrypoint.sh
 RUN chmod +x /tmp/wp-entrypoint.sh
 
 # Update and install dependencies
-RUN apk update && apk add mysql-client php-fpm php81 \
+RUN apk update && apk add --no-cache mysql-client php-fpm php81 \
 			php81-phar php81-common php81-session php81-iconv php81-json \
 			php81-gd php81-curl php81-xml php81-mysqli php81-imap php81-cgi \
 			fcgi php81-pdo php81-pdo_mysql php81-soap php81-posix php81-tokenizer \

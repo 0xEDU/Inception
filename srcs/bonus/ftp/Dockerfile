@@ -4,7 +4,7 @@ ARG FTP_USER
 ARG FTP_PASSWORD
 ARG FTP_PATH
 
-RUN apk update && apk add vsftpd
+RUN apk update && apk add --no-cache vsftpd
 
 COPY conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
 

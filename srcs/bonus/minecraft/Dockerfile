@@ -5,7 +5,7 @@ RUN chmod +x /tmp/mine-entrypoint.sh; \
 	mkdir -p /minecraft
 COPY ./conf/ ./minecraft
 
-RUN apk update && apk add openjdk17-jre
+RUN apk update && apk add --no-cache openjdk17-jre
 
 WORKDIR /minecraft
 EXPOSE 25565

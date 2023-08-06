@@ -4,7 +4,7 @@ COPY tools/adminer-entrypoint.sh /tmp/adminer-entrypoint.sh
 RUN chmod +x /tmp/adminer-entrypoint.sh
 
 WORKDIR /tmp
-RUN apk update && apk add php81 php-fpm php81-mysqli php81-session
+RUN apk update && apk --no-cache add php81 php-fpm php81-mysqli php81-session
 RUN wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-en.php \
 	&& chmod +x adminer-4.8.1-en.php \
 	&& mkdir -p /var/www/adminer \
