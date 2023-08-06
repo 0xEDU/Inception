@@ -149,9 +149,9 @@ services:
       context: ./bonus/minecraft
     container_name: minecraft
     volumes:
-      - minecraft-volume:/data
+      - minecraft-volume:/minecraft
     ports:
-      - "25565:4242"
+      - "25565:25565"
     networks:
       - inception
     restart:
